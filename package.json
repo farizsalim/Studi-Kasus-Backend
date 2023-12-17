@@ -2,7 +2,6 @@
   "name": "studi-kasus-backend",
   "version": "0.0.0",
   "private": true,
-  "main": "./bin/www",
   "scripts": {
     "start": "nodemon ./bin/www"
   },
