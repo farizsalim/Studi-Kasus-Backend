@@ -2,8 +2,9 @@
   "name": "studi-kasus-backend",
   "version": "0.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "@casl/ability": "^6.5.0",
