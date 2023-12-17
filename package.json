@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "set DEBUG=studi-kasus-backend:* & nodemon start"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@casl/ability": "^6.5.0",
