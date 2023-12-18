@@ -13,7 +13,7 @@ const deliveryRoute = require('./app/deliveryAddress/router')
 const cartRoute  =require('./app/cart/router')
 const orderRoute  =require('./app/order/router')
 const invoiceRoute  =require('./app/invoice/router')
-
+const http = require('http');
 
 var app = express();
 
@@ -58,6 +58,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+const server = http.createServer(app);
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+  console.log(`Server berjalan di port ${port}`);
 });
 
 module.exports = app;
