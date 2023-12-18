@@ -45,11 +45,11 @@ app.use('/api',orderRoute)
 app.use('/api',invoiceRoute)
 
 
-app.use('/', function(req,res){
-  res.render('index',{
-    title: 'Studi Kasus Backend'
-  })
-})
+// app.use('/', function(req,res){
+//   res.render('index',{
+//     title: 'Studi Kasus Backend'
+//   })
+// })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
