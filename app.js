@@ -17,6 +17,12 @@ const http = require('http');
 
 var app = express();
 
+const server = http.createServer(app);
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+  console.log(`Server berjalan di port ${port}`);
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -37,6 +43,7 @@ app.use('/api',deliveryRoute)
 app.use('/api',cartRoute)
 app.use('/api',orderRoute)
 app.use('/api',invoiceRoute)
+
 
 app.use('/', function(req,res){
   res.render('index',{
@@ -60,11 +67,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const server = http.createServer(app);
-const port = process.env.PORT || 3000;
-
-server.listen(port, () => {
-  console.log(`Server berjalan di port ${port}`);
-});
 
 module.exports = app;
