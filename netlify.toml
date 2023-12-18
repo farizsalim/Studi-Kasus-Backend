@@ -1,0 +1,6 @@
+[build]
+  command = "npm run start" # Sesuaikan dengan skrip build Anda
+  publish = "app.js" # Sesuaikan dengan direktori publik hasil build
+
+[dev]
+  command = "npm start" # Sesuaikan dengan skrip start Anda untuk pengembangan lokal
