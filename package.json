@@ -1,10 +1,14 @@
 {
   "name": "studi-kasus-backend",
   "version": "1.0.0",
+  "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
+  "author": "farizsalim",
+  "license": "ISC",
   "dependencies": {
     "@casl/ability": "^6.5.0",
     "bcrypt": "^5.1.1",
