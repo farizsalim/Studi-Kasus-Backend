@@ -13,19 +13,12 @@ const deliveryRoute = require('./app/deliveryAddress/router')
 const cartRoute  =require('./app/cart/router')
 const orderRoute  =require('./app/order/router')
 const invoiceRoute  =require('./app/invoice/router')
-const http = require('http');
 
 var app = express();
 
-const server = http.createServer(app);
-const port = process.env.PORT || 3000;
-
-server.listen(port, () => {
-  console.log(`Server berjalan di port ${port}`);
-});
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
 
 app.use(cors())
 app.use(logger('dev'));
@@ -45,27 +38,27 @@ app.use('/api',orderRoute)
 app.use('/api',invoiceRoute)
 
 
-// app.use('/', function(req,res){
-//   res.render('index',{
-//     title: 'Studi Kasus Backend'
-//   })
-// })
+app.use('/', function(req,res){
+  res.render('index',{
+    title: 'Studi Kasus Backend'
+  })
+})
 
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 
 module.exports = app;
