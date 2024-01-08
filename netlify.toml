@@ -1,2 +1,16 @@
 [build]
-    function = "functions"
+  functions = "functions"
+  command = "npm run build"  # Sesuaikan dengan skrip build Anda jika diperlukan
+
+[dev]
+  functions = "functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+      Access-Control-Allow-Origin = "*"
