@@ -4,7 +4,8 @@
   "main":"./bin/www",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/netlify-lambda"
+    "start": "./node_modules/.bin/netlify-lambda",
+    "build": "/node_modules/.bin/netlify-lambda build functions"
   },
   "author": "",
   "license": "ISC",
