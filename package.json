@@ -1,14 +1,16 @@
 {
   "name": "studi-kasus-backend",
   "version": "1.0.0",
+  "main":"./bin/www",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "start": "./node_modules/.bin/netlify-lambda"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@casl/ability": "^6.5.0",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "bson": "^6.2.0",
     "cookie-parser": "~1.4.4",
