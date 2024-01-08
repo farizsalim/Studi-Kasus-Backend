@@ -1,6 +1,6 @@
 [build]
   functions = "functions"
-  command = "npm run build"  # Sesuaikan dengan skrip build Anda jika diperlukan
+  command = "npm run start"  # Sesuaikan dengan skrip build Anda jika diperlukan
 
 [dev]
   functions = "functions"
