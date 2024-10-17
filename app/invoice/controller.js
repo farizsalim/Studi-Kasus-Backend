@@ -1,31 +1,47 @@
-const {subject} = require('@casl/ability')
-const invoice = require('../invoice/model')
-const {policyFor} = require('../../utils')
+const { subject } = require('@casl/ability');
+const Invoice = require('../invoice/model'); // Mengganti invoice dengan Invoice untuk lebih jelas
+const { policyFor } = require('../../utils');
 
-const show = async(req, res, next) => {
+const show = async (req, res, next) => {
     try {
-        let policy = policyFor(req.user)
-        let subjectInvoice = subject('Invoice', {...invoice,user_id: invoice.user._id})
-        if(!policy.can('read', subjectInvoice)){
-            return res.json({
+        let policy = policyFor(req.user);
+        
+        // Mendapatkan order_id dari params
+        const { order_id } = req.params;
+
+        // Mencari invoice berdasarkan order_id
+        const invoiceData = await Invoice
+            .findOne({ order: order_id })
+            .populate('order')
+            .populate('user');
+
+        // Jika invoice tidak ditemukan
+        if (!invoiceData) {
+            return res.status(404).json({
                 error: 1,
-                message: 'Anda tidak memiliki akses untuk melihat invoice ini.'
-            })
+                message: 'Invoice tidak ditemukan.'
+            });
         }
 
-        let {order_id} = req.params;
-        let invoice = 
-        await invoice
-        .findOne({order: order_id})
-        .populate('order')
-        .populate('user')
+        // Membuat subjek untuk kebijakan akses
+        const subjectInvoice = subject('Invoice', { ...invoiceData, user_id: invoiceData.user._id });
 
-        return res.json(invoice);
-    }catch(err){
-        return res.json({
-            error:1,
-            message: 'Error when getting invoice'
-        })
+        // Memeriksa apakah pengguna memiliki akses untuk melihat invoice
+        if (!policy.can('read', subjectInvoice)) {
+            return res.status(403).json({
+                error: 1,
+                message: 'Anda tidak memiliki akses untuk melihat invoice ini.'
+            });
+        }
+
+        // Jika izin diberikan, mengembalikan invoice
+        return res.json(invoiceData);
+    } catch (err) {
+        console.error(err); // Menyimpan log kesalahan untuk debug
+        return res.status(500).json({
+            error: 1,
+            message: 'Terjadi kesalahan saat mengambil invoice.'
+        });
     }
 }
 

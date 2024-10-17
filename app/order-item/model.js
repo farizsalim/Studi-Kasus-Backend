@@ -1,29 +1,33 @@
-const mongoose = require('mongoose')
-const {model, Schema} = mongoose
+const mongoose = require('mongoose');
+const { model, Schema } = mongoose;
 
-const orderItemSchema = Schema({
+const orderItemSchema = new Schema({
     name: {
         type: String,
-        minlength: [5, 'Panjang nama makanan minimal 50 karakter'],
-        required: [true, 'name must be filled']
+        minlength: [5, 'Panjang nama produk minimal 5 karakter'],
+        required: [true, 'Nama produk harus diisi'],
     },
     price: {
         type: Number,
-        required: [true, 'Harga item harus diisi']
+        required: [true, 'Harga item harus diisi'],
     },
     qty: {
         type: Number,
         required: [true, 'Kuantitas harus diisi'],
-        min: [1, 'Kuantitas minimal 1']
+        min: [1, 'Kuantitas minimal 1'],
     },
     product: {
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Product',
+        required: true,
     },
     order: {
         type: Schema.Types.ObjectId,
-        ref: 'Order'
-    }
-})
+        ref: 'Order',
+        required: true,
+    },
+}, {
+    timestamps: true,
+});
 
-module.exports = model('OrderItem', orderItemSchema)
+module.exports = model('OrderItem', orderItemSchema);

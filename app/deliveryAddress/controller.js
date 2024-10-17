@@ -24,18 +24,18 @@ const store = async (req,res,next) => {
 
 const index = async(req, res, next) => {
     try {
-        let category = await DeliveryAddress.find();
-        return res.json(category);
-    }catch(err) {
+        let user = req.user;  // Dapatkan user yang sedang login
+        let addresses = await DeliveryAddress.find({ user: user._id });  // Filter berdasarkan user._id
+        return res.json(addresses);
+    } catch (err) {
         if(err && err.name === 'ValidationError'){
             return res.json({
                 error: 1,
                 message: err.message,
                 fields: err.errors
-        })
-    }
-
-    next(err);
+            });
+        }
+        next(err);
     }
 }
 
